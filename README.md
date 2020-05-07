@@ -1,17 +1,10 @@
 # flutter_practice_animation
 
-A new Flutter application.
+A new Flutter application for training animation.
 
-## Getting Started
+## Reference
 
-This project is a starting point for a Flutter application.
+### animation_one
 
-A few resources to get you started if this is your first Flutter project:
+- [Zero to One with Flutter](https://medium.com/flutter/zero-to-one-with-flutter-43b13fd7b354)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# flutter_practice_animation
