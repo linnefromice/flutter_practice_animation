@@ -10,7 +10,7 @@ class Bar {
   final double height;
 
   static Bar lerp(Bar begin, Bar end, double t) {
-    return Bar(lerpDouble((begin.height), end.height, t));
+    return Bar(lerpDouble(begin.height, end.height, t));
   }
 }
 
@@ -18,7 +18,7 @@ class BarTween extends Tween<Bar> {
   BarTween(Bar begin, Bar end) : super(begin: begin, end: end);
 
   @override
-  Bar leap(double t) => Bar.lerp(begin, end, t);
+  Bar lerp(double t) => Bar.lerp(begin, end, t);
 }
 
 class BarChartPainter extends CustomPainter {
