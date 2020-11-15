@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.1"
+  flick:
+    dependency: "direct main"
+    description:
+      name: flick
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4+1"
   flutter:
     dependency: "direct main"
     description: flutter
