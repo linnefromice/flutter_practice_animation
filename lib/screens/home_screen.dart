@@ -69,6 +69,14 @@ class HomeScreen extends StatelessWidget {
               child: Center(child: Text('Wave')),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, '/align_transition'),
+            child: Container(
+              height: 50,
+              color: Colors.amber[300],
+              child: Center(child: Text('AlignTransition')),
+            ),
+          ),
         ],
       ),
     );
