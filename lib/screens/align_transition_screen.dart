@@ -7,7 +7,9 @@ class AlignTransitionScreen extends StatefulWidget {
 
 class _State extends State<AlignTransitionScreen> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Animation<Alignment> _alignment;
+  bool _isTopLeft;
+  Animation<Alignment> _alignmentTopLeft;
+  Animation<Alignment> _alignmentBottomRight;
 
   @override
   void initState() {
@@ -16,10 +18,17 @@ class _State extends State<AlignTransitionScreen> with SingleTickerProviderState
         duration: Duration(milliseconds: 500),
         vsync: this
     );
-    _alignment = _animationController.drive(
+    _isTopLeft = true;
+    _alignmentTopLeft = _animationController.drive(
         AlignmentTween(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight
+        )
+    );
+    _alignmentBottomRight = _animationController.drive(
+        AlignmentTween(
+          begin: Alignment.bottomRight,
+          end: Alignment.topLeft
         )
     );
   }
@@ -34,7 +43,7 @@ class _State extends State<AlignTransitionScreen> with SingleTickerProviderState
   Widget build(BuildContext context) {
     return Scaffold(
       body: AlignTransition(
-        alignment: _alignment,
+        alignment: _isTopLeft ? _alignmentBottomRight : _alignmentTopLeft,
         child: Container(
           width: 100,
           height: 100,
@@ -42,7 +51,12 @@ class _State extends State<AlignTransitionScreen> with SingleTickerProviderState
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _animationController.forward(),
+        onPressed: () {
+          _animationController.forward();
+          setState(() {
+            _isTopLeft = !_isTopLeft;
+          });
+        },
         child: Icon(Icons.refresh),
       ),
     );
