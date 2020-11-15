@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/screens/chart_page.dart';
 import 'package:flutter_practice_animation/screens/home_screen.dart';
+import 'package:flutter_practice_animation/screens/liquid_swipe_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/chart': (context) => ChartPage()
+        '/chart': (context) => ChartPage(),
+        '/liquid_swipe': (context) => LiquidSwipeScreen()
       },
     );
   }
