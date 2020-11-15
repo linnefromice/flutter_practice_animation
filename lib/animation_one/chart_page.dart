@@ -35,7 +35,29 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void changeData() {
+  void handleAdd() {
+    setState(() {
+      dataSet += 5;
+      tween = BarTween(
+        tween.evaluate(animation),
+        Bar(dataSet.toDouble()),
+      );
+      animation.forward(from: 0.0);
+    });
+  }
+
+  void handleRemove() {
+    setState(() {
+      dataSet -= 5;
+      tween = BarTween(
+        tween.evaluate(animation),
+        Bar(dataSet.toDouble()),
+      );
+      animation.forward(from: 0.0);
+    });
+  }
+
+  void handleRandomize() {
     setState(() {
       dataSet = random.nextInt(100);
       tween = BarTween(
@@ -63,21 +85,21 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
             label: Text('Random'),
             icon: Icon(Icons.refresh),
             backgroundColor: Colors.grey,
-            onPressed: changeData,
+            onPressed: handleRandomize,
           ),
           SizedBox(height: 10),
           FloatingActionButton.extended(
             label: Text('Minus'),
             icon: Icon(Icons.remove),
             backgroundColor: Colors.red,
-            onPressed: changeData,
+            onPressed: handleRemove,
           ),
           SizedBox(height: 10),
           FloatingActionButton.extended(
             label: Text('Plus'),
             icon: Icon(Icons.add),
             backgroundColor: Colors.blue,
-            onPressed: changeData,
+            onPressed: handleAdd,
           ),
         ],
       )
