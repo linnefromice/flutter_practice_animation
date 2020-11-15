@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/screens/chart_page.dart';
 import 'package:flutter_practice_animation/screens/flick_screen.dart';
 import 'package:flutter_practice_animation/screens/gesture_detector_screen.dart';
+import 'package:flutter_practice_animation/screens/gesture_detector_two_screen.dart';
 import 'package:flutter_practice_animation/screens/home_screen.dart';
 import 'package:flutter_practice_animation/screens/liquid_swipe_screen.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         '/chart': (context) => ChartPage(),
         '/liquid_swipe': (context) => LiquidSwipeScreen(),
         '/flick': (context) => FlickScreen(),
-        '/gesture_detector': (context) => GestureDetectorScreen()
+        '/gesture_detector': (context) => GestureDetectorScreen(),
+        '/gesture_detector_two': (context) => GestureDetectorTwoScreen(),
       },
     );
   }

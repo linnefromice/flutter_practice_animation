@@ -53,6 +53,14 @@ class HomeScreen extends StatelessWidget {
               child: Center(child: Text('GestureDetector')),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, '/gesture_detector_two'),
+            child: Container(
+              height: 50,
+              color: Colors.amber[500],
+              child: Center(child: Text('GestureDetectorTwo')),
+            ),
+          ),
         ],
       ),
     );
