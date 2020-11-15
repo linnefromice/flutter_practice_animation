@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChartPage(),
+      initialRoute: '/chart',
+      routes: {
+        '/chart': (context) => ChartPage()
+      },
     );
   }
 }
