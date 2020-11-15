@@ -7,6 +7,7 @@ class AlignTransitionScreen extends StatefulWidget {
 
 class _State extends State<AlignTransitionScreen> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
+  Animation<Alignment> _alignment;
 
   @override
   void initState() {
@@ -14,6 +15,12 @@ class _State extends State<AlignTransitionScreen> with SingleTickerProviderState
     _animationController = AnimationController(
         duration: Duration(milliseconds: 500),
         vsync: this
+    );
+    _alignment = _animationController.drive(
+        AlignmentTween(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight
+        )
     );
   }
 
@@ -27,12 +34,7 @@ class _State extends State<AlignTransitionScreen> with SingleTickerProviderState
   Widget build(BuildContext context) {
     return Scaffold(
       body: AlignTransition(
-        alignment: _animationController.drive(
-          AlignmentTween(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight
-          )
-        ),
+        alignment: _alignment,
         child: Container(
           width: 100,
           height: 100,
