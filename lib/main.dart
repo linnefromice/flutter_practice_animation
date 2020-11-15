@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/screens/chart_page.dart';
+import 'package:flutter_practice_animation/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,8 +13,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/chart',
+      initialRoute: '/',
       routes: {
+        '/': (context) => HomeScreen(),
         '/chart': (context) => ChartPage()
       },
     );

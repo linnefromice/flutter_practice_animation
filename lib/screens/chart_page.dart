@@ -81,6 +81,7 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton.extended(
+            heroTag: "random",
             label: Text('Random'),
             icon: Icon(Icons.refresh),
             backgroundColor: Colors.grey,
@@ -88,6 +89,7 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
           ),
           SizedBox(height: 10),
           FloatingActionButton.extended(
+            heroTag: "minus",
             label: Text('Minus'),
             icon: Icon(Icons.remove),
             backgroundColor: Colors.red,
@@ -95,6 +97,7 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
           ),
           SizedBox(height: 10),
           FloatingActionButton.extended(
+            heroTag: "plus",
             label: Text('Plus'),
             icon: Icon(Icons.add),
             backgroundColor: Colors.blue,
