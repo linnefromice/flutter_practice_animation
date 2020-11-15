@@ -55,8 +55,10 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
           painter: BarChartPainter(tween.animate(animation)),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Random'),
+        icon: Icon(Icons.refresh),
+        backgroundColor: Colors.grey,
         onPressed: changeData,
       ),
     );
