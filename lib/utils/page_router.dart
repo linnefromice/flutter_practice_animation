@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_animation/screens/wave_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_practice_animation/screens/align_transition_screen.dart';
+import 'package:flutter_practice_animation/screens/wave_screen.dart';
 import 'package:flutter_practice_animation/screens/chart_page.dart';
 import 'package:flutter_practice_animation/screens/flick_screen.dart';
 import 'package:flutter_practice_animation/screens/gesture_detector_screen.dart';
@@ -59,6 +60,15 @@ mixin PageRouter implements StatelessWidget {
             child: WaveScreen(),
             type: PageTransitionType.scale,
             alignment: Alignment.bottomCenter,
+            settings: settings
+        );
+        break;
+      case '/align_transition':
+        return PageTransition(
+            child: AlignTransitionScreen(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.bottomCenter,
+            duration: Duration(seconds: 1),
             settings: settings
         );
         break;
