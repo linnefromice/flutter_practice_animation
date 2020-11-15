@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_animation/screens/chart_page.dart';
-import 'package:flutter_practice_animation/screens/flick_screen.dart';
-import 'package:flutter_practice_animation/screens/gesture_detector_screen.dart';
-import 'package:flutter_practice_animation/screens/gesture_detector_two_screen.dart';
 import 'package:flutter_practice_animation/screens/home_screen.dart';
-import 'package:flutter_practice_animation/screens/liquid_swipe_screen.dart';
+import 'package:flutter_practice_animation/utils/page_router.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,16 +12,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/chart': (context) => ChartPage(),
-        '/liquid_swipe': (context) => LiquidSwipeScreen(),
-        '/flick': (context) => FlickScreen(),
-        '/gesture_detector': (context) => GestureDetectorScreen(),
-        '/gesture_detector_two': (context) => GestureDetectorTwoScreen(),
-      },
+      home: HomeScreen(),
+      onGenerateRoute: (settings) => PageRouter.generate(settings)
     );
   }
 }
