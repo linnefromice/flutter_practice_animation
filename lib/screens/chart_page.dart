@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
-import 'bar.dart';
+import '../components/bar.dart';
 
 class ChartPage extends StatefulWidget {
   @override

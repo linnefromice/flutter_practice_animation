@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_animation/animation_one/chart_page.dart';
+import 'package:flutter_practice_animation/screens/chart_page.dart';
 
 void main() => runApp(MyApp());
 
