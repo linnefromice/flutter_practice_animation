@@ -70,6 +70,7 @@ class _State extends State<ChartPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: CustomPaint(
           size: Size(200.0, 100.0),
