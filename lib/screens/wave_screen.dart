@@ -76,6 +76,14 @@ class _State extends State<WaveScreen> with SingleTickerProviderStateMixin {
                 waveController.value,
                 0
               ),
+            ),
+            ClipPath(
+              child: Container(color: darkBlue.withOpacity(0.6)),
+              clipper: WaveClipper(
+                context,
+                waveController.value,
+                0.5
+              ),
             )
           ],
         )
