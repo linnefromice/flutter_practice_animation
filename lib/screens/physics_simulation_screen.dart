@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
 
 class PhysicsSimulationScreen extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class PhysicsSimulationScreen extends StatefulWidget {
 
 class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  Alignment _dragAlignment = Alignment.center;
+  Alignment _dragAlignment = Alignment.bottomCenter;
   Animation<Alignment> _animation;
 
   @override
@@ -34,7 +35,7 @@ class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderSta
     _animation = _controller.drive(
       AlignmentTween(
         begin: _dragAlignment,
-        end: Alignment.center,
+        end: Alignment.topCenter, // Alignment.topCenter にすると上部に飛ぶ
       ),
     );
     _controller.reset();
@@ -46,24 +47,35 @@ class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderSta
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: GestureDetector(
-        onPanDown: (details) {
-          _controller.stop();
-        },
-        onPanUpdate: (details) {
-          setState(() {
-            _dragAlignment += Alignment(
-              details.delta.dx / (size.width / 2),
-              details.delta.dy / (size.height / 2),
-            );
-          });
-        },
-        onPanEnd: (details) {
-          _runAnimation();
-        },
-        child: Align(
-          alignment: _dragAlignment,
-          child: FlutterLogo()
+      body: WrapperCommonBackground(
+        child: GestureDetector(
+          onPanDown: (details) {
+            _controller.stop();
+          },
+          onPanUpdate: (details) {
+            setState(() {
+              _dragAlignment += Alignment(
+                details.delta.dx / (size.width / 2),
+                details.delta.dy / (size.height / 2),
+              );
+            });
+          },
+          onPanEnd: (details) {
+            _runAnimation();
+          },
+          child: Align(
+              alignment: _dragAlignment,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.favorite, color: Colors.pink, size: 40),
+                  Icon(Icons.favorite, color: Colors.pink, size: 40),
+                  Icon(Icons.favorite, color: Colors.pink, size: 40),
+                  Icon(Icons.favorite, color: Colors.pink, size: 40),
+                  Icon(Icons.favorite, color: Colors.pink, size: 40),
+                ],
+              )
+          ),
         ),
       )
     );
