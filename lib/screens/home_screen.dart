@@ -85,6 +85,14 @@ class HomeScreen extends StatelessWidget {
               child: Center(child: Text('PhysicsSimulation')),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, '/animated_positioned'),
+            child: Container(
+              height: 50,
+              color: Colors.amber[100],
+              child: Center(child: Text('AnimatedPositioned')),
+            ),
+          ),
         ],
       ),
     );
