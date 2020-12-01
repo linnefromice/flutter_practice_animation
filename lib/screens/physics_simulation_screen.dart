@@ -8,11 +8,20 @@ class PhysicsSimulationScreen extends StatefulWidget {
 class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Alignment _dragAlignment = Alignment.center;
+  Animation<Alignment> _animation;
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this);
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200) // スピードになっている。アニメーションスピードなので必須項目
+    );
+    _controller.addListener(() {
+      setState(() {
+        _dragAlignment = _animation.value;
+      });
+    });
   }
 
   @override
@@ -21,13 +30,26 @@ class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderSta
     super.dispose();
   }
 
+  void _runAnimation() {
+    _animation = _controller.drive(
+      AlignmentTween(
+        begin: _dragAlignment,
+        end: Alignment.center,
+      ),
+    );
+    _controller.reset();
+    _controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: GestureDetector(
-        onPanDown: (details) {},
+        onPanDown: (details) {
+          _controller.stop();
+        },
         onPanUpdate: (details) {
           setState(() {
             _dragAlignment += Alignment(
@@ -36,7 +58,9 @@ class _State extends State<PhysicsSimulationScreen> with SingleTickerProviderSta
             );
           });
         },
-        onPanEnd: (details) {},
+        onPanEnd: (details) {
+          _runAnimation();
+        },
         child: Align(
           alignment: _dragAlignment,
           child: FlutterLogo()
