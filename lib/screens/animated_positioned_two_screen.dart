@@ -57,7 +57,6 @@ class _State extends State<AnimatedPositionedTwoScreen> {
                 setState(() {
                   rating = details.localPosition.dx/_widgetsWidth * 5;
                 });
-                print(details.localPosition.dx/_widgetsWidth * 5);
               },
             )
           )
