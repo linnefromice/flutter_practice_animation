@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_animation/components/rated_heart.dart';
 
 class AnimatedPositionedTwoScreen extends StatefulWidget {
   @override
@@ -20,9 +21,8 @@ class _State extends State<AnimatedPositionedTwoScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(rating.toStringAsFixed(2)),
-          Icon(
-            Icons.favorite,
-            color: Colors.pink,
+          RatedHeart(
+            rate: rating,
             size: 50,
           ),
         ],
