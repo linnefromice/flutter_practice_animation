@@ -46,6 +46,16 @@ class _State extends State<AnimatedPositionedTwoScreen> {
           )
         ]
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            isClick = false;
+          });
+        },
+        backgroundColor: Colors.grey,
+        child: Icon(Icons.refresh),
+        tooltip: "refresh",
+      ),
     );
   }
 }
