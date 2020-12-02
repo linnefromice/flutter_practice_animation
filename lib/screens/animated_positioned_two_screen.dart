@@ -31,14 +31,20 @@ class _State extends State<AnimatedPositionedTwoScreen> {
           _buildAnimatedPositionedHeart(MediaQuery.of(context).size.width * 0.50 - 25, MediaQuery.of(context).size.width * 0.50 - 25),
           _buildAnimatedPositionedHeart(MediaQuery.of(context).size.width * 0.65 - 25, MediaQuery.of(context).size.width * 0.80 - 25),
           _buildAnimatedPositionedHeart(MediaQuery.of(context).size.width * 0.80 - 25, MediaQuery.of(context).size.width * 1.10 - 25),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.70 - 50,
+            left: 0,
+            height: 100,
+            width: MediaQuery.of(context).size.width,
+            child: GestureDetector(
+              onVerticalDragUpdate: (details) {
+                setState(() {
+                  isClick = true;
+                });
+              },
+            )
+          )
         ]
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            isClick = true;
-          });
-        },
       ),
     );
   }
