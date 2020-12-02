@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/screens/animated_positioned_screen.dart';
+import 'package:flutter_practice_animation/screens/animated_positioned_two_screen.dart';
 import 'package:flutter_practice_animation/screens/physics_simulation_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_practice_animation/screens/align_transition_screen.dart';
@@ -86,6 +87,15 @@ mixin PageRouter implements StatelessWidget {
       case '/animated_positioned':
         return PageTransition(
             child: AnimatedPositionedScreen(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.bottomCenter,
+            duration: Duration(seconds: 1),
+            settings: settings
+        );
+        break;
+      case '/animated_positioned_two':
+        return PageTransition(
+            child: AnimatedPositionedTwoScreen(),
             type: PageTransitionType.scale,
             alignment: Alignment.bottomCenter,
             duration: Duration(seconds: 1),
