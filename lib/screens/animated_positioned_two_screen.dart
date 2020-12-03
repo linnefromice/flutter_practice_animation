@@ -13,17 +13,18 @@ class _State extends State<AnimatedPositionedTwoScreen> {
   double rating = 0.0;
 
   Widget _buildAnimatedPositionedHeart(final double rating, final double fromLeft, final double toLeft) {
+    final double _iconSize = 50;
     return AnimatedPositioned(
       duration: Duration(milliseconds: 500),
-      top: isClick ? -50 : MediaQuery.of(context).size.height * 0.70 - 25,
-      left: isClick ? toLeft : fromLeft,
+      top: isClick ? - _iconSize : MediaQuery.of(context).size.height * 0.70 - _iconSize * 0.50,
+      left: isClick ? toLeft - _iconSize * 0.50 : fromLeft - _iconSize * 0.50,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(rating.toStringAsFixed(2)),
           RatedHeart(
             rate: rating,
-            size: 50,
+            size: _iconSize,
           ),
         ],
       )
@@ -37,11 +38,11 @@ class _State extends State<AnimatedPositionedTwoScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 0)), MediaQuery.of(context).size.width * 0.20 - 25, MediaQuery.of(context).size.width * -0.10 - 25),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 1)), MediaQuery.of(context).size.width * 0.35 - 25, MediaQuery.of(context).size.width * 0.20 - 25),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 2)), MediaQuery.of(context).size.width * 0.50 - 25, MediaQuery.of(context).size.width * 0.50 - 25),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 3)), MediaQuery.of(context).size.width * 0.65 - 25, MediaQuery.of(context).size.width * 0.80 - 25),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 4)), MediaQuery.of(context).size.width * 0.80 - 25, MediaQuery.of(context).size.width * 1.10 - 25),
+          _buildAnimatedPositionedHeart(min(1, max(0, rating - 0)), MediaQuery.of(context).size.width * 0.20, MediaQuery.of(context).size.width * -0.10),
+          _buildAnimatedPositionedHeart(min(1, max(0, rating - 1)), MediaQuery.of(context).size.width * 0.35, MediaQuery.of(context).size.width * 0.20),
+          _buildAnimatedPositionedHeart(min(1, max(0, rating - 2)), MediaQuery.of(context).size.width * 0.50, MediaQuery.of(context).size.width * 0.50),
+          _buildAnimatedPositionedHeart(min(1, max(0, rating - 3)), MediaQuery.of(context).size.width * 0.65, MediaQuery.of(context).size.width * 0.80),
+          _buildAnimatedPositionedHeart(min(1, max(0, rating - 4)), MediaQuery.of(context).size.width * 0.80, MediaQuery.of(context).size.width * 1.10),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.70 - 50,
             left: MediaQuery.of(context).size.width * 0.15,
