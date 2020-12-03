@@ -12,6 +12,19 @@ class _State extends State<AnimatedPositionedTwoScreen> {
   bool isClick = false;
   double rating = 0.0;
 
+  List<Widget> _createRatingHearts() {
+    final int count = 5;
+    final fromLeftWeightingFactors = [0.20, 0.35, 0.50, 0.65, 0.80];
+    final toLeftWeightingFactors = [-0.10, -0.20, 0.50, 0.80, 1.10];
+    return List.generate(count, (index) =>
+        _buildAnimatedPositionedHeart(
+            min(1, max(0, rating - index)),
+            MediaQuery.of(context).size.width * fromLeftWeightingFactors[index],
+            MediaQuery.of(context).size.width * toLeftWeightingFactors[index]
+        )
+    );
+  }
+
   Widget _buildAnimatedPositionedHeart(final double rating, final double fromLeft, final double toLeft) {
     final double _iconSize = 50;
     return AnimatedPositioned(
@@ -31,37 +44,36 @@ class _State extends State<AnimatedPositionedTwoScreen> {
     );
   }
 
+  Widget _buildGestureDetectorWidget(final double wrappedWidgetWidth) {
+    return GestureDetector(
+      onVerticalDragEnd: (details) {
+        setState(() {
+          isClick = true;
+        });
+      },
+      onHorizontalDragUpdate: (details) {
+        setState(() {
+          rating = details.localPosition.dx/wrappedWidgetWidth * 5;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final double _widgetsWidth = MediaQuery.of(context).size.width * 0.70;
+    List<Widget> _children = _createRatingHearts();
+    _children.add(Positioned(
+      top: MediaQuery.of(context).size.height * 0.70 - 50,
+      left: MediaQuery.of(context).size.width * 0.15,
+      height: 100,
+      width: _widgetsWidth * 0.70,
+      child: _buildGestureDetectorWidget(_widgetsWidth)
+    ));
 
     return Scaffold(
       body: Stack(
-        children: [
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 0)), MediaQuery.of(context).size.width * 0.20, MediaQuery.of(context).size.width * -0.10),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 1)), MediaQuery.of(context).size.width * 0.35, MediaQuery.of(context).size.width * 0.20),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 2)), MediaQuery.of(context).size.width * 0.50, MediaQuery.of(context).size.width * 0.50),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 3)), MediaQuery.of(context).size.width * 0.65, MediaQuery.of(context).size.width * 0.80),
-          _buildAnimatedPositionedHeart(min(1, max(0, rating - 4)), MediaQuery.of(context).size.width * 0.80, MediaQuery.of(context).size.width * 1.10),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.70 - 50,
-            left: MediaQuery.of(context).size.width * 0.15,
-            height: 100,
-            width: _widgetsWidth * 0.70,
-            child: GestureDetector(
-              onVerticalDragEnd: (details) {
-                setState(() {
-                  isClick = true;
-                });
-              },
-              onHorizontalDragUpdate: (details) {
-                setState(() {
-                  rating = details.localPosition.dx/_widgetsWidth * 5;
-                });
-              },
-            )
-          )
-        ]
+        children: _children,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
