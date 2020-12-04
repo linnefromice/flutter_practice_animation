@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/components/rated_heart.dart';
+import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
 
 class AnimatedPositionedTwoScreen extends StatefulWidget {
   @override
@@ -72,8 +73,10 @@ class _State extends State<AnimatedPositionedTwoScreen> {
     ));
 
     return Scaffold(
-      body: Stack(
-        children: _children,
+      body: WrapperCommonBackground(
+        child: Stack(
+          children: _children,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
