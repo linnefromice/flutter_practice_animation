@@ -9,7 +9,7 @@ class MultiAnimationsScreen extends StatefulWidget {
 
 class _State extends State<MultiAnimationsScreen> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Tween<double> _sizeTween;
+  Animation<double> _sizeTween;
 
   @override
   void initState() {
@@ -17,13 +17,13 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 100)
-    )..addListener(() {
-      setState(() {});
-    });
+    );
     _sizeTween = Tween<double>(
       begin: 50,
       end: 100
-    );
+    ).animate(_animationController)..addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -38,7 +38,7 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
       body: WrapperCommonBackground(
         child: Center(
           child: RatedHeart(
-            size: _sizeTween.evaluate(_animationController),
+            size: _sizeTween.value,
             rate: 1.0,
           ),
         )
