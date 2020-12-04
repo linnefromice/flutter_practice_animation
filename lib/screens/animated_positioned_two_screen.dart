@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/components/rated_heart.dart';
+import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
 
 class AnimatedPositionedTwoScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _State extends State<AnimatedPositionedTwoScreen> {
   List<Widget> _createRatingHearts() {
     final int count = 5;
     final fromLeftWeightingFactors = [0.20, 0.35, 0.50, 0.65, 0.80];
-    final toLeftWeightingFactors = [-0.10, -0.20, 0.50, 0.80, 1.10];
+    final toLeftWeightingFactors = [-0.10, 0.20, 0.50, 0.80, 1.10];
     return List.generate(count, (index) =>
         _buildAnimatedPositionedHeart(
             min(1, max(0, rating - index)),
@@ -72,8 +73,10 @@ class _State extends State<AnimatedPositionedTwoScreen> {
     ));
 
     return Scaffold(
-      body: Stack(
-        children: _children,
+      body: WrapperCommonBackground(
+        child: Stack(
+          children: _children,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
