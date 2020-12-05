@@ -9,7 +9,8 @@ class MultiAnimationsScreen extends StatefulWidget {
 
 class _State extends State<MultiAnimationsScreen> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Animation<double> _sizeTween;
+  Animation<double> _sizeAnimation;
+  Animation<Color> _colorAnimation;
 
   @override
   void initState() {
@@ -18,9 +19,15 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
       vsync: this,
       duration: Duration(milliseconds: 100)
     );
-    _sizeTween = Tween<double>(
+    _sizeAnimation = Tween<double>(
       begin: 50,
       end: 100
+    ).animate(_animationController)..addListener(() {
+      setState(() {});
+    });
+    _colorAnimation = ColorTween(
+      begin: Colors.grey,
+      end: Colors.pink
     ).animate(_animationController)..addListener(() {
       setState(() {});
     });
@@ -37,10 +44,14 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
     return Scaffold(
       body: WrapperCommonBackground(
         child: Center(
-          child: RatedHeart(
-            size: _sizeTween.value,
-            rate: 1.0,
-          ),
+          child: CustomPaint(
+            painter: ShapePainter(),
+            child: RatedHeart(
+              size: _sizeAnimation.value,
+              rate: 1.0,
+              color: _colorAnimation.value,
+            ),
+          )
         )
       ),
       floatingActionButton: Column( // 本来非推奨
@@ -63,5 +74,24 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
         ],
       )
     );
+  }
+}
+
+class ShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+        ..color = Colors.pink
+        ..strokeWidth = 5
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round;
+
+    Offset center = Offset(size.width / 2, size.height / 2);
+    canvas.drawCircle(center, 100, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
