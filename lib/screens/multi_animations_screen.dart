@@ -44,11 +44,14 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
     return Scaffold(
       body: WrapperCommonBackground(
         child: Center(
-          child: RatedHeart(
-            size: _sizeAnimation.value,
-            rate: 1.0,
-            color: _colorAnimation.value,
-          ),
+          child: CustomPaint(
+            painter: ShapePainter(),
+            child: RatedHeart(
+              size: _sizeAnimation.value,
+              rate: 1.0,
+              color: _colorAnimation.value,
+            ),
+          )
         )
       ),
       floatingActionButton: Column( // 本来非推奨
@@ -71,5 +74,24 @@ class _State extends State<MultiAnimationsScreen> with SingleTickerProviderState
         ],
       )
     );
+  }
+}
+
+class ShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+        ..color = Colors.pink
+        ..strokeWidth = 5
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round;
+
+    Offset center = Offset(size.width / 2, size.height / 2);
+    canvas.drawCircle(center, 100, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
