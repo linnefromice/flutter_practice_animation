@@ -109,6 +109,14 @@ class HomeScreen extends StatelessWidget {
               child: Center(child: Text('MultiAnimations')),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, '/custom_painter'),
+            child: Container(
+              height: 50,
+              color: Colors.amber[50],
+              child: Center(child: Text('CustomPainter')),
+            ),
+          ),
         ],
       ),
     );
