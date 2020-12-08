@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:im_animations/im_animations.dart';
 
 class AnimatedRatingHeartsScreen extends StatefulWidget {
   @override
@@ -93,6 +94,22 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
     );
   }
 
+  Widget _buildAvatarArea(final double width, final double height) => Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Colors.white,
+          Colors.blue[500],
+        ],
+      )
+    )
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,23 +171,20 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
             ),
           ),
           Positioned( // instead of Avatar
-            top: MediaQuery.of(context).size.height * 0.30,
-            left: MediaQuery.of(context).size.width * 0.50 - 50,
-            child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.white,
-                        Colors.blue[500],
-                      ],
-                    )
-                )
-            )
+            top: MediaQuery.of(context).size.height * 0.30 - 0 - 25, // for avatar area size + for sonar
+            left: MediaQuery.of(context).size.width * 0.50 - 50 - 35, // for avatar area size + for sonar
+            child: _animation.status == AnimationStatus.completed ? // TODO: now don't move
+              Sonar(
+                wavesDisabled: false,
+                waveColor: Colors.blueAccent,
+                radius: 100,
+                child: _buildAvatarArea(100, 100)
+              ) : Sonar(
+                wavesDisabled: true,
+                waveColor: Colors.blueAccent,
+                radius: 100,
+                child: _buildAvatarArea(100, 100)
+              )
           ),
         ]
       ),
