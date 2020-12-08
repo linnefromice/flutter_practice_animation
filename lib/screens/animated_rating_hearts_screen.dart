@@ -192,6 +192,9 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
         onPressed: () {
           _controller.forward();
         },
+        child: Icon(
+          Icons.forward
+        ),
       ),
     );
   }
