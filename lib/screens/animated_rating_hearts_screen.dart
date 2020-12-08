@@ -48,14 +48,14 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
   Path drawFirstPath() {
     Size size = Size(300,300);
     Path path = Path();
-    path.quadraticBezierTo( -size.width * 0.6, -size.height * 0.5, 0, -size.height);
+    path.quadraticBezierTo( -size.width * 0.6, -size.height * 0.5, 100, -size.height);
     return path;
   }
 
   Path drawSecondPath() {
     Size size = Size(300,300);
     Path path = Path();
-    path.quadraticBezierTo( -size.width * 0.4, -size.height * 0.5, 0, -size.height);
+    path.quadraticBezierTo( -size.width * 0.4, -size.height * 0.5, 50, -size.height);
     return path;
   }
 
@@ -69,14 +69,14 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
   Path drawFourthPath() {
     Size size = Size(300,300);
     Path path = Path();
-    path.quadraticBezierTo( size.width * 0.4, -size.height * 0.5, 0, -size.height);
+    path.quadraticBezierTo( size.width * 0.4, -size.height * 0.5, -50, -size.height);
     return path;
   }
 
   Path drawFifthPath() {
     Size size = Size(300,300);
     Path path = Path();
-    path.quadraticBezierTo( size.width * 0.6, -size.height * 0.5, 0, -size.height);
+    path.quadraticBezierTo( size.width * 0.6, -size.height * 0.5, -100, -size.height);
     return path;
   }
 
@@ -152,6 +152,25 @@ class _State extends State<AnimatedRatingHeartsScreen> with SingleTickerProvider
             child: CustomPaint(
               painter: PathPainter(drawFifthPath()),
             ),
+          ),
+          Positioned( // instead of Avatar
+            top: MediaQuery.of(context).size.height * 0.30,
+            left: MediaQuery.of(context).size.width * 0.50 - 50,
+            child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.white,
+                        Colors.blue[500],
+                      ],
+                    )
+                )
+            )
           ),
         ]
       ),
