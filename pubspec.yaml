@@ -26,6 +26,7 @@ dependencies:
   page_transition: "^1.1.7+2"
   liquid_swipe: ^1.5.0
   flick: ^1.0.4+1
+  im_animations: ^0.1.1
 
 dev_dependencies:
   flutter_test:
