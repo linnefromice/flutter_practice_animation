@@ -117,6 +117,14 @@ class HomeScreen extends StatelessWidget {
               child: Center(child: Text('CustomPainter')),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, '/animated_rating_hearts'),
+            child: Container(
+              height: 50,
+              color: Colors.amber[100],
+              child: Center(child: Text('AnimatedRatingHearts')),
+            ),
+          ),
         ],
       ),
     );

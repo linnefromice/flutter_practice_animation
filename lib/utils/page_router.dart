@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_animation/screens/animated_positioned_screen.dart';
 import 'package:flutter_practice_animation/screens/animated_positioned_two_screen.dart';
+import 'package:flutter_practice_animation/screens/animated_rating_hearts_screen.dart';
 import 'package:flutter_practice_animation/screens/custom_painter_screen.dart';
 import 'package:flutter_practice_animation/screens/multi_animations_screen.dart';
 import 'package:flutter_practice_animation/screens/physics_simulation_screen.dart';
@@ -120,6 +121,15 @@ mixin PageRouter implements StatelessWidget {
             alignment: Alignment.bottomCenter,
             duration: Duration(seconds: 1),
             settings: settings
+        );
+        break;
+      case '/animated_rating_hearts':
+        return PageTransition(
+          child: AnimatedRatingHeartsScreen(),
+          type: PageTransitionType.scale,
+          alignment: Alignment.bottomCenter,
+          duration: Duration(seconds: 1),
+          settings: settings
         );
         break;
       default:
