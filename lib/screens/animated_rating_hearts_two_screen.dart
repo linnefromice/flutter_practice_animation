@@ -154,7 +154,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   Widget _buildGestureDetectorWidget(final double wrappedWidgetWidth) {
     return GestureDetector(
       onVerticalDragEnd: (details) {
-        // TODO: start animation
+        _playAnimation();
       },
       onHorizontalDragUpdate: (details) {
         double sumRating = details.localPosition.dx/wrappedWidgetWidth * 5;
