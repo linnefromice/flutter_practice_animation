@@ -40,6 +40,13 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         tag: 'move_heart'
       )
       .addAnimatable(
+        animatable: Tween<double>(begin: 50, end: 60),
+        from: Duration(milliseconds: 0),
+        to: Duration(milliseconds: 3000),
+        curve: Curves.easeInOutSine,
+        tag: 'heart_beat'
+      )
+      .addAnimatable(
         animatable: Tween<double>(begin: 0.0, end: 1.0),
         from: Duration(milliseconds: 0),
         to: Duration(milliseconds: 1000),
@@ -190,7 +197,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
 
     List<Widget> _children = _createRatingHearts(
       baseTop: _baseTop,
-      iconSize: _heartIconSize,
+      iconSize: _sequenceAnimation['heart_beat'].value,
       sumRating: _sumRating
     );
     _children.add(Positioned(
