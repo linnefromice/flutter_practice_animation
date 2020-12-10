@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
@@ -14,13 +15,30 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   double _sumRating;
   AnimationController _controller;
   SequenceAnimation _sequenceAnimation;
+  Path _firstPath;
+  Path _secondPath;
+  Path _thirdPath;
+  Path _fourthPath;
+  Path _fifthPath;
 
   @override
   void initState() {
     super.initState();
     _sumRating = 0.0;
     _controller = AnimationController(vsync: this);
+    _firstPath = drawFirstPath();
+    _secondPath = drawSecondPath();
+    _thirdPath = drawThirdPath();
+    _fourthPath = drawFourthPath();
+    _fifthPath = drawFifthPath();
     _sequenceAnimation = SequenceAnimationBuilder()
+      .addAnimatable(
+        animatable: Tween<double>(begin: 0.0, end: 1.0),
+        from: Duration(milliseconds: 0),
+        to: Duration(milliseconds: 3000),
+        curve: Curves.bounceIn,
+        tag: 'move_heart'
+      )
       .addAnimatable(
         animatable: Tween<double>(begin: 0.0, end: 1.0),
         from: Duration(milliseconds: 0),
@@ -50,12 +68,55 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     super.dispose();
   }
 
+  Path drawFirstPath() {
+    Size size = Size(300,300);
+    Path path = Path();
+    path.quadraticBezierTo( -size.width * 0.6, -size.height * 0.5, 100, -size.height);
+    return path;
+  }
+
+  Path drawSecondPath() {
+    Size size = Size(300,300);
+    Path path = Path();
+    path.quadraticBezierTo( -size.width * 0.4, -size.height * 0.5, 50, -size.height);
+    return path;
+  }
+
+  Path drawThirdPath() {
+    Size size = Size(300,300);
+    Path path = Path();
+    path.quadraticBezierTo( 0, -size.height * 0.5, 0, -size.height);
+    return path;
+  }
+
+  Path drawFourthPath() {
+    Size size = Size(300,300);
+    Path path = Path();
+    path.quadraticBezierTo( size.width * 0.4, -size.height * 0.5, -50, -size.height);
+    return path;
+  }
+
+  Path drawFifthPath() {
+    Size size = Size(300,300);
+    Path path = Path();
+    path.quadraticBezierTo( size.width * 0.6, -size.height * 0.5, -100, -size.height);
+    return path;
+  }
+
   Future<Null> _playAnimation() async {
     try {
       await _controller.forward().orCancel;
     } on TickerCanceled {
       // the animation got canceled, probably because we were disposed
     }
+  }
+
+  Offset calculate(value, path) {
+    PathMetrics pathMetrics = path.computeMetrics();
+    PathMetric pathMetric = pathMetrics.elementAt(0);
+    value = pathMetric.length * value;
+    Tangent pos = pathMetric.getTangentForOffset(value);
+    return pos.position;
   }
 
   Widget _buildPositionedHeart(final double rating, final double iconSize, final double top, final double left) {
@@ -72,12 +133,13 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   List<Widget> _createRatingHearts({final double baseTop, final double iconSize, final double sumRating}) {
     final int count = 5;
     final leftWeightingFactors = [0.20, 0.35, 0.50, 0.65, 0.80];
+    final paths = [_firstPath, _secondPath, _thirdPath, _fourthPath, _fifthPath];
     return List.generate(count, (index) =>
       _buildPositionedHeart(
         min(1, max(0, sumRating - index)),
         iconSize,
-        baseTop - iconSize * 0.50,
-        MediaQuery.of(context).size.width * leftWeightingFactors[index] - iconSize * 0.50,
+        baseTop - iconSize * 0.50 + calculate(_sequenceAnimation['move_heart'].value, paths[index]).dy, // base top & icon size & animation
+        MediaQuery.of(context).size.width * leftWeightingFactors[index] - iconSize * 0.50 + calculate(_sequenceAnimation['move_heart'].value, paths[index]).dx, // base top & icon size & animation
       )
     );
   }
