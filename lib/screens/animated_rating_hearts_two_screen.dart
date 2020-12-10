@@ -88,8 +88,11 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         // TODO: start animation
       },
       onHorizontalDragUpdate: (details) {
+        double sumRating = details.localPosition.dx/wrappedWidgetWidth * 5;
+        if (sumRating > 5) sumRating = 5;
+        if (sumRating < 0) sumRating = 0;
         setState(() {
-          _sumRating = details.localPosition.dx/wrappedWidgetWidth * 5;
+          _sumRating = sumRating;
         });
       },
     );
@@ -142,8 +145,6 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: WrapperCommonBackground(
         child: AnimatedBuilder(
