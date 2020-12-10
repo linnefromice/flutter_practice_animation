@@ -98,27 +98,55 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     );
   }
 
+  Widget _buildAvatarArea() => Container(
+    height: MediaQuery.of(context).size.width * 0.50,
+    width: MediaQuery.of(context).size.width * 0.50,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Colors.white,
+          Colors.blue[100],
+        ],
+      )
+    ),
+    child: FractionallySizedBox(
+      alignment: Alignment.topCenter,
+      widthFactor: 0.6,
+      child: CircleAvatar(
+        maxRadius: 30,
+      )
+    ),
+  );
+
   List<Widget> _buildChildren(BuildContext context) {
     final double _heartIconSize = 50;
     final double _baseTop = MediaQuery.of(context).size.height * 0.70;
     final double _widgetsWidth = MediaQuery.of(context).size.width * 0.70;
 
     List<Widget> _children = _createRatingHearts(
-        baseTop: _baseTop,
-        iconSize: _heartIconSize,
-        sumRating: _sumRating
+      baseTop: _baseTop,
+      iconSize: _heartIconSize,
+      sumRating: _sumRating
     );
     _children.add(Positioned(
-        top: _baseTop - _heartIconSize,
-        left: MediaQuery.of(context).size.width * 0.15,
-        height: 100,
-        width: _widgetsWidth * 0.70,
-        child: _buildGestureDetectorWidget(_widgetsWidth)
+      top: MediaQuery.of(context).size.height * 0.25,
+      left: MediaQuery.of(context).size.width * 0.25,
+      child: _buildAvatarArea(),
     ));
     _children.add(Positioned(
-        top: _baseTop - _heartIconSize,
-        left: MediaQuery.of(context).size.width * 0.5 - 10,
-        child: Text(_sumRating.toStringAsPrecision(2))
+      top: _baseTop - _heartIconSize,
+      left: MediaQuery.of(context).size.width * 0.15,
+      height: 100,
+      width: _widgetsWidth * 0.70,
+      child: _buildGestureDetectorWidget(_widgetsWidth)
+    ));
+    _children.add(Positioned(
+      top: _baseTop - _heartIconSize,
+      left: MediaQuery.of(context).size.width * 0.5 - 10,
+      child: Text(_sumRating.toStringAsPrecision(2))
     ));
     _children.add(Positioned( // TODO: debug code for flutter_sequence_animation
       top: _baseTop + 150,
