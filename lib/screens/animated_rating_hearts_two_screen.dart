@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 import 'package:flutter_practice_animation/components/rated_heart.dart';
 import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
-import 'package:im_animations/im_animations.dart';
+// import 'package:im_animations/im_animations.dart';
 
 class AnimatedRatingHeartsTwoScreen extends StatefulWidget {
   @override
