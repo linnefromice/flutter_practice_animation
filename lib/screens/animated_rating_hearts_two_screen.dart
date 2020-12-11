@@ -149,8 +149,9 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     return GestureDetector(
       onVerticalDragEnd: (details) async {
         _playAnimation();
-        await Future.delayed(Duration(milliseconds: 3000));
-        // if use ColorSonar
+
+//        if use ColorSonar
+//        await Future.delayed(Duration(milliseconds: 3000));
 //        setState(() {
 //          _wavesDisabled = false;
 //        });
