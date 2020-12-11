@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 import 'package:flutter_practice_animation/components/rated_heart.dart';
 import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
+import 'package:im_animations/im_animations.dart';
 
 class AnimatedRatingHeartsTwoScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class AnimatedRatingHeartsTwoScreen extends StatefulWidget {
 
 class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProviderStateMixin {
   double _sumRating;
+  bool _wavesDisabled;
   AnimationController _controller;
   SequenceAnimation _sequenceAnimation;
   Path _firstPath;
@@ -25,6 +27,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   void initState() {
     super.initState();
     _sumRating = 0.0;
+    _wavesDisabled = true;
     _controller = AnimationController(vsync: this);
     _firstPath = drawFirstPath();
     _secondPath = drawSecondPath();
@@ -132,8 +135,12 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
 
   Widget _buildGestureDetectorWidget(final double wrappedWidgetWidth) {
     return GestureDetector(
-      onVerticalDragEnd: (details) {
+      onVerticalDragEnd: (details) async {
         _playAnimation();
+        await Future.delayed(Duration(milliseconds: 3000));
+        setState(() {
+          _wavesDisabled = false;
+        });
       },
       onHorizontalDragUpdate: (details) {
         double sumRating = details.localPosition.dx/wrappedWidgetWidth * 5;
@@ -147,8 +154,8 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   }
 
   Widget _buildAvatarArea() => Container(
-    height: MediaQuery.of(context).size.width * 0.50,
-    width: MediaQuery.of(context).size.width * 0.50,
+    height: MediaQuery.of(context).size.width * 0.40,
+    width: MediaQuery.of(context).size.width * 0.40,
     decoration: BoxDecoration(
       shape: BoxShape.circle,
       gradient: LinearGradient(
@@ -180,9 +187,17 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
       sumRating: _sumRating
     );
     _children.add(Positioned(
-      top: MediaQuery.of(context).size.height * 0.25,
-      left: MediaQuery.of(context).size.width * 0.25,
-      child: _buildAvatarArea(),
+      top: MediaQuery.of(context).size.height * 0.30,
+      left: MediaQuery.of(context).size.width * 0.30,
+      child: ColorSonar(
+        contentAreaRadius: 80,
+        waveMotionEffect: Curves.easeInOut,
+        wavesDisabled: _wavesDisabled,
+        innerWaveColor: Colors.blue[100],
+        middleWaveColor: Colors.blue[50],
+        outerWaveColor: Colors.white,
+        child: _buildAvatarArea(),
+      ),
     ));
     _children.add(Positioned(
       top: _baseTop - _heartIconSize,
