@@ -14,7 +14,7 @@ class AnimatedRatingHeartsTwoScreen extends StatefulWidget {
 
 class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProviderStateMixin {
   double _sumRating;
-  bool _wavesDisabled;
+  // bool _wavesDisabled; // <- base color (if use ColorSonar)
   AnimationController _controller;
   SequenceAnimation _sequenceAnimation;
   Path _firstPath;
@@ -27,7 +27,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
   void initState() {
     super.initState();
     _sumRating = 0.0;
-    _wavesDisabled = true;
+    // _wavesDisabled = true; // <- base color (if use ColorSonar)
     _controller = AnimationController(vsync: this);
     _firstPath = drawFirstPath();
     _secondPath = drawSecondPath();
@@ -48,6 +48,12 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         to: Duration(milliseconds: 3000),
         curve: Curves.easeInOutSine,
         tag: 'heart_beat'
+      )
+      .addAnimatable(
+        animatable: ColorTween(begin: Colors.blue[100], end: Colors.pink[100]),
+        from: Duration(milliseconds: 3000),
+        to: Duration(milliseconds: 4000),
+        tag: 'avatar_circle_color'
       ).animate(_controller);
   }
 
@@ -138,9 +144,10 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
       onVerticalDragEnd: (details) async {
         _playAnimation();
         await Future.delayed(Duration(milliseconds: 3000));
-        setState(() {
-          _wavesDisabled = false;
-        });
+        // if use ColorSonar
+//        setState(() {
+//          _wavesDisabled = false;
+//        });
       },
       onHorizontalDragUpdate: (details) {
         double sumRating = details.localPosition.dx/wrappedWidgetWidth * 5;
@@ -163,7 +170,8 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         end: Alignment.bottomRight,
         colors: [
           Colors.white,
-          Colors.blue[100],
+          _sequenceAnimation['avatar_circle_color'].value
+          // Colors.blue[100], <- base color (if use ColorSonar)
         ],
       )
     ),
@@ -189,15 +197,16 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     _children.add(Positioned(
       top: MediaQuery.of(context).size.height * 0.30,
       left: MediaQuery.of(context).size.width * 0.30,
-      child: ColorSonar(
-        contentAreaRadius: 80,
-        waveMotionEffect: Curves.easeInOut,
-        wavesDisabled: _wavesDisabled,
-        innerWaveColor: Colors.blue[100],
-        middleWaveColor: Colors.blue[50],
-        outerWaveColor: Colors.white,
-        child: _buildAvatarArea(),
-      ),
+      child: _buildAvatarArea()
+//      child: ColorSonar(
+//        contentAreaRadius: 80,
+//        waveMotionEffect: Curves.easeInOut,
+//        wavesDisabled: _wavesDisabled,
+//        innerWaveColor: Colors.blue[100],
+//        middleWaveColor: Colors.blue[50],
+//        outerWaveColor: Colors.white,
+//        child: _buildAvatarArea(),
+//      ),
     ));
     _children.add(Positioned(
       top: _baseTop - _heartIconSize,
