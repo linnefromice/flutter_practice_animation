@@ -36,6 +36,13 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     _fifthPath = drawFifthPath();
     _sequenceAnimation = SequenceAnimationBuilder()
       .addAnimatable(
+        animatable: Tween<double>(begin: 1.0, end: 0.0),
+        from: Duration(milliseconds: 0),
+        to: Duration(milliseconds: 3000),
+        curve: Curves.easeInOut,
+        tag: 'sum_rating_display_opacity'
+      )
+      .addAnimatable(
         animatable: Tween<double>(begin: 0.0, end: 1.0),
         from: Duration(milliseconds: 0),
         to: Duration(milliseconds: 3000),
@@ -149,7 +156,6 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     return GestureDetector(
       onVerticalDragEnd: (details) async {
         _playAnimation();
-
 //        if use ColorSonar
 //        await Future.delayed(Duration(milliseconds: 3000));
 //        setState(() {
@@ -225,7 +231,13 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
     _children.add(Positioned(
       top: _baseTop - _heartIconSize,
       left: MediaQuery.of(context).size.width * 0.5 - 10,
-      child: Text(_sumRating.toStringAsPrecision(2))
+      child: Text(
+        _sumRating.toStringAsPrecision(2),
+        style: TextStyle(
+          color: Colors.pink[200].withOpacity(_sequenceAnimation['sum_rating_display_opacity'].value),
+          fontWeight: FontWeight.bold
+        ),
+      )
     ));
     return _children;
   }
