@@ -50,10 +50,16 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         tag: 'heart_beat'
       )
       .addAnimatable(
-        animatable: ColorTween(begin: Colors.blue[100], end: Colors.pink[100]),
+        animatable: ColorTween(begin: Colors.white, end: Colors.pink[50]),
         from: Duration(milliseconds: 3000),
         to: Duration(milliseconds: 4000),
-        tag: 'avatar_circle_color'
+        tag: 'from_avatar_circle_color'
+      )
+      .addAnimatable(
+        animatable: ColorTween(begin: Colors.blue[100], end: Colors.pink[200]),
+        from: Duration(milliseconds: 3000),
+        to: Duration(milliseconds: 4000),
+        tag: 'to_avatar_circle_color'
       ).animate(_controller);
   }
 
@@ -169,8 +175,8 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Colors.white,
-          _sequenceAnimation['avatar_circle_color'].value
+          _sequenceAnimation['from_avatar_circle_color'].value,
+          _sequenceAnimation['to_avatar_circle_color'].value
           // Colors.blue[100], <- base color (if use ColorSonar)
         ],
       )
