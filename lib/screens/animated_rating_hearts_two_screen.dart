@@ -12,6 +12,14 @@ class AnimatedRatingHeartsTwoScreen extends StatefulWidget {
   _State createState() => _State();
 }
 
+enum Tags {
+  SumRatingDisplayOpacity,
+  MoveHeart,
+  HeartBeat,
+  FromAvatarCircleColor,
+  ToAvatarCircleColor
+}
+
 class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProviderStateMixin {
   double _sumRating;
   // bool _wavesDisabled; // <- base color (if use ColorSonar)
@@ -40,33 +48,33 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         from: Duration(milliseconds: 0),
         to: Duration(milliseconds: 3000),
         curve: Curves.easeInOut,
-        tag: 'sum_rating_display_opacity'
+        tag: Tags.SumRatingDisplayOpacity
       )
       .addAnimatable(
         animatable: Tween<double>(begin: 0.0, end: 1.0),
         from: Duration(milliseconds: 0),
         to: Duration(milliseconds: 3000),
         curve: Curves.bounceIn,
-        tag: 'move_heart'
+        tag: Tags.MoveHeart
       )
       .addAnimatable(
         animatable: Tween<double>(begin: 50, end: 60),
         from: Duration(milliseconds: 0),
         to: Duration(milliseconds: 3000),
         curve: Curves.easeInOutSine,
-        tag: 'heart_beat'
+        tag: Tags.HeartBeat
       )
       .addAnimatable(
         animatable: ColorTween(begin: Colors.white, end: Colors.pink[50]),
         from: Duration(milliseconds: 3000),
         to: Duration(milliseconds: 4000),
-        tag: 'from_avatar_circle_color'
+        tag: Tags.FromAvatarCircleColor
       )
       .addAnimatable(
         animatable: ColorTween(begin: Colors.blue[100], end: Colors.pink[200]),
         from: Duration(milliseconds: 3000),
         to: Duration(milliseconds: 4000),
-        tag: 'to_avatar_circle_color'
+        tag: Tags.ToAvatarCircleColor
       ).animate(_controller);
   }
 
@@ -146,8 +154,8 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
       _buildPositionedHeart(
         min(1, max(0, sumRating - index)),
         iconSize,
-        baseTop - iconSize * 0.50 + calculate(_sequenceAnimation['move_heart'].value, paths[index]).dy, // base top & icon size & animation
-        MediaQuery.of(context).size.width * leftWeightingFactors[index] - iconSize * 0.50 + calculate(_sequenceAnimation['move_heart'].value, paths[index]).dx, // base top & icon size & animation
+        baseTop - iconSize * 0.50 + calculate(_sequenceAnimation[Tags.MoveHeart].value, paths[index]).dy, // base top & icon size & animation
+        MediaQuery.of(context).size.width * leftWeightingFactors[index] - iconSize * 0.50 + calculate(_sequenceAnimation[Tags.MoveHeart].value, paths[index]).dx, // base top & icon size & animation
       )
     );
   }
@@ -182,8 +190,8 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          _sequenceAnimation['from_avatar_circle_color'].value,
-          _sequenceAnimation['to_avatar_circle_color'].value
+          _sequenceAnimation[Tags.FromAvatarCircleColor].value,
+          _sequenceAnimation[Tags.ToAvatarCircleColor].value
           // Colors.blue[100], <- base color (if use ColorSonar)
         ],
       )
@@ -204,7 +212,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
 
     List<Widget> _children = _createRatingHearts(
       baseTop: _baseTop,
-      iconSize: _sequenceAnimation['heart_beat'].value,
+      iconSize: _sequenceAnimation[Tags.HeartBeat].value,
       sumRating: _sumRating
     );
     _children.add(Positioned(
@@ -234,7 +242,7 @@ class _State extends State<AnimatedRatingHeartsTwoScreen> with SingleTickerProvi
       child: Text(
         _sumRating.toStringAsPrecision(2),
         style: TextStyle(
-          color: Colors.pink[200].withOpacity(_sequenceAnimation['sum_rating_display_opacity'].value),
+          color: Colors.pink[200].withOpacity(_sequenceAnimation[Tags.SumRatingDisplayOpacity].value),
           fontWeight: FontWeight.bold
         ),
       )
