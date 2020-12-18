@@ -33,6 +33,34 @@ class _State extends State<PageControllerScreen> {
               CircleAvatar(child: Text("User 5")),
               CircleAvatar(child: Text("User 6")),
             ]
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    child: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      _pageController.animateToPage(
+                        _pageController.page.toInt() - 1,
+                        duration: Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
+                  RaisedButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      _pageController.animateToPage(
+                        _pageController.page.toInt() + 1,
+                        duration: Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
+                ],
+              )
           )
         ],
       ),
