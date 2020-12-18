@@ -25,6 +25,11 @@ class _State extends State<PageControllerScreen> {
     super.dispose();
   }
 
+  Widget _buildPaginationButton({final IconData iconData, final Function onPressed}) => RaisedButton(
+    child: Icon(iconData),
+    onPressed: onPressed,
+  );
+
   @override
   Widget build(BuildContext context) {
     return WrapperCommonBackground(
@@ -55,8 +60,8 @@ class _State extends State<PageControllerScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
-                    child: Icon(Icons.arrow_back),
+                  _buildPaginationButton(
+                    iconData: Icons.arrow_back,
                     onPressed: () {
                       _pageController.animateToPage(
                         _pageController.page.toInt() - 1,
@@ -65,8 +70,8 @@ class _State extends State<PageControllerScreen> {
                       );
                     }
                   ),
-                  RaisedButton(
-                    child: Icon(Icons.arrow_forward),
+                  _buildPaginationButton(
+                    iconData: Icons.arrow_forward,
                     onPressed: () {
                       _pageController.animateToPage(
                         _pageController.page.toInt() + 1,
