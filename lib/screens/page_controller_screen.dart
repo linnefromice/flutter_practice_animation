@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_animation/components/avatar_area.dart';
 import 'package:flutter_practice_animation/components/wrapper_common_background.dart';
 
 class PageControllerScreen extends StatefulWidget {
@@ -18,16 +19,11 @@ class _State extends State<PageControllerScreen> {
     super.initState();
   }
 
-  Widget _createSlideButton(final Icon icon, final int nextPage) => RaisedButton(
-    child: icon,
-    onPressed: () {
-      _pageController.animateToPage(
-        nextPage,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-  );
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +33,21 @@ class _State extends State<PageControllerScreen> {
           PageView(
             controller: _pageController,
             children: [
-              CircleAvatar(child: Text("User 1")),
-              CircleAvatar(child: Text("User 2")),
-              CircleAvatar(child: Text("User 3")),
-              CircleAvatar(child: Text("User 4")),
-              CircleAvatar(child: Text("User 5")),
-              CircleAvatar(child: Text("User 6")),
+              AvatarArea(
+                diameter: MediaQuery.of(context).size.width * 0.75,
+                child: Text("User 1"),
+                image: null,
+              ),
+              AvatarArea(
+                diameter: MediaQuery.of(context).size.width * 0.75,
+                child: Text("User 2"),
+                image: null,
+              ),
+              AvatarArea(
+                diameter: MediaQuery.of(context).size.width * 0.75,
+                child: Text("User 3"),
+                image: null,
+              ),
             ]
           ),
           Align(
@@ -50,13 +55,25 @@ class _State extends State<PageControllerScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _createSlideButton(
-                    Icon(Icons.arrow_back),
-                    _pageController.page.toInt() - 1
+                  RaisedButton(
+                    child: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      _pageController.animateToPage(
+                        _pageController.page.toInt() - 1,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    }
                   ),
-                  _createSlideButton(
-                    Icon(Icons.arrow_forward),
-                    _pageController.page.toInt() + 1
+                  RaisedButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      _pageController.animateToPage(
+                        _pageController.page.toInt() + 1,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    }
                   )
                 ],
               )
