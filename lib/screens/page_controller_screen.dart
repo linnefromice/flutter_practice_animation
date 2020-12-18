@@ -18,6 +18,17 @@ class _State extends State<PageControllerScreen> {
     super.initState();
   }
 
+  Widget _createSlideButton(final Icon icon, final int nextPage) => RaisedButton(
+    child: icon,
+    onPressed: () {
+      _pageController.animateToPage(
+        nextPage,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  );
+
   @override
   Widget build(BuildContext context) {
     return WrapperCommonBackground(
@@ -39,26 +50,14 @@ class _State extends State<PageControllerScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
-                    child: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      _pageController.animateToPage(
-                        _pageController.page.toInt() - 1,
-                        duration: Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                      );
-                    },
+                  _createSlideButton(
+                    Icon(Icons.arrow_back),
+                    _pageController.page.toInt() - 1
                   ),
-                  RaisedButton(
-                    child: Icon(Icons.arrow_forward),
-                    onPressed: () {
-                      _pageController.animateToPage(
-                        _pageController.page.toInt() + 1,
-                        duration: Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                  ),
+                  _createSlideButton(
+                    Icon(Icons.arrow_forward),
+                    _pageController.page.toInt() + 1
+                  )
                 ],
               )
           )
