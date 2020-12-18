@@ -56,7 +56,7 @@ class _State extends State<PageControllerScreen> {
             ]
           ),
           Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -70,6 +70,7 @@ class _State extends State<PageControllerScreen> {
                       );
                     }
                   ),
+                  SizedBox(width: 200),
                   _buildPaginationButton(
                     iconData: Icons.arrow_forward,
                     onPressed: () {
