@@ -32,59 +32,61 @@ class _State extends State<PageControllerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WrapperCommonBackground(
-      child: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
+    return Scaffold(
+      body: WrapperCommonBackground(
+          child: Stack(
             children: [
-              AvatarArea(
-                diameter: MediaQuery.of(context).size.width * 0.75,
-                child: Text("User 1"),
-                image: null,
+              PageView(
+                  controller: _pageController,
+                  children: [
+                    AvatarArea(
+                      diameter: MediaQuery.of(context).size.width,
+                      child: Text("User 1"),
+                      image: null,
+                    ),
+                    AvatarArea(
+                      diameter: MediaQuery.of(context).size.width,
+                      child: Text("User 2"),
+                      image: null,
+                    ),
+                    AvatarArea(
+                      diameter: MediaQuery.of(context).size.width,
+                      child: Text("User 3"),
+                      image: null,
+                    ),
+                  ]
               ),
-              AvatarArea(
-                diameter: MediaQuery.of(context).size.width * 0.75,
-                child: Text("User 2"),
-                image: null,
-              ),
-              AvatarArea(
-                diameter: MediaQuery.of(context).size.width * 0.75,
-                child: Text("User 3"),
-                image: null,
-              ),
-            ]
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildPaginationButton(
-                    iconData: Icons.arrow_back,
-                    onPressed: () {
-                      _pageController.animateToPage(
-                        _pageController.page.toInt() - 1,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  ),
-                  SizedBox(width: 200),
-                  _buildPaginationButton(
-                    iconData: Icons.arrow_forward,
-                    onPressed: () {
-                      _pageController.animateToPage(
-                        _pageController.page.toInt() + 1,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    }
+              Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildPaginationButton(
+                        iconData: Icons.arrow_back,
+                        onPressed: () {
+                          _pageController.animateToPage(
+                            _pageController.page.toInt() - 1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      ),
+                      SizedBox(width: 200),
+                      _buildPaginationButton(
+                        iconData: Icons.arrow_forward,
+                        onPressed: () {
+                          _pageController.animateToPage(
+                            _pageController.page.toInt() + 1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      )
+                    ],
                   )
-                ],
-              )
-          )
-        ],
+              ),
+          ],
+        ),
       ),
     );
   }
