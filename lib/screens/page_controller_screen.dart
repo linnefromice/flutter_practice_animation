@@ -29,75 +29,75 @@ class _State extends State<PageControllerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WrapperCommonBackground(
-          child: Stack(
-            children: [
-              PageView(
-                  controller: _pageController,
-                  children: [
-                    AvatarArea(
-                      diameter: MediaQuery.of(context).size.width,
-                      child: Text("User 1"),
-                      image: null,
-                    ),
-                    AvatarArea(
-                      diameter: MediaQuery.of(context).size.width,
-                      child: Text("User 2"),
-                      image: null,
-                    ),
-                    AvatarArea(
-                      diameter: MediaQuery.of(context).size.width,
-                      child: Text("User 3"),
-                      image: null,
-                    ),
-                  ]
-              ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ButtonTheme(
-                        minWidth: 50,
-                        height: 50,
-                        child: RaisedButton(
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                          color: Colors.transparent,
-                          shape: CircleBorder(),
-                          onPressed: () {
-                            _pageController.animateToPage(
-                              _pageController.page.toInt() - 1,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        ),
+        child: Stack(
+          children: [
+            PageView(
+              controller: _pageController,
+              children: [
+                AvatarArea(
+                  diameter: MediaQuery.of(context).size.width,
+                  child: Text("User 1"),
+                  image: null,
+                ),
+                AvatarArea(
+                  diameter: MediaQuery.of(context).size.width,
+                  child: Text("User 2"),
+                  image: null,
+                ),
+                AvatarArea(
+                  diameter: MediaQuery.of(context).size.width,
+                  child: Text("User 3"),
+                  image: null,
+                ),
+              ]
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ButtonTheme(
+                    minWidth: 50,
+                    height: 50,
+                    child: RaisedButton(
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
                       ),
-                      SizedBox(width: 200),
-                      ButtonTheme(
-                        minWidth: 50,
-                        height: 50,
-                        child: RaisedButton(
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                          ),
-                          color: Colors.transparent,
-                          shape: CircleBorder(),
-                          onPressed: () {
-                            _pageController.animateToPage(
-                              _pageController.page.toInt() + 1,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        ),
-                      )
-                    ],
+                      color: Colors.transparent,
+                      shape: CircleBorder(),
+                      onPressed: () {
+                        _pageController.animateToPage(
+                          _pageController.page.toInt() - 1,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    ),
+                  ),
+                  SizedBox(width: 200),
+                  ButtonTheme(
+                    minWidth: 50,
+                    height: 50,
+                    child: RaisedButton(
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      ),
+                      color: Colors.transparent,
+                      shape: CircleBorder(),
+                      onPressed: () {
+                        _pageController.animateToPage(
+                          _pageController.page.toInt() + 1,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    ),
                   )
-              ),
+                ],
+              )
+            ),
           ],
         ),
       ),
