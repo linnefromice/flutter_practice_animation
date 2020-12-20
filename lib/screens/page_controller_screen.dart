@@ -7,20 +7,31 @@ class PageControllerScreen extends StatefulWidget {
   _State createState() => _State();
 }
 
-class _State extends State<PageControllerScreen> {
+class _State extends State<PageControllerScreen> with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+  Animation<double> _opacity;
   PageController _pageController;
 
   @override
   void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500)
+    );
+    _opacity = _animationController.drive(Tween<double>(
+      begin: 1,
+      end: 0
+    ));
     _pageController = PageController(
       initialPage: 0,
       viewportFraction: 0.5
     );
-    super.initState();
   }
 
   @override
   void dispose() {
+    _animationController.dispose();
     _pageController.dispose();
     super.dispose();
   }
@@ -125,32 +136,35 @@ class _State extends State<PageControllerScreen> {
               left: 0,
               right: 0,
               child: GestureDetector(
-                child: Column(
-                  children: [
-                    _buildIconsArea(),
-                    Container(
-                      width: 120,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.blue[100], // Colors.transparent
-                        borderRadius: BorderRadius.circular(25.0),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2.5
-                        )
-                      ),
-                      child: Center(
-                        child: Text(
-                          "SWIPE UP",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0
+                child: FadeTransition(
+                  opacity: _opacity,
+                  child: Column(
+                    children: [
+                      _buildIconsArea(),
+                      Container(
+                        width: 120,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.blue[100], // Colors.transparent
+                            borderRadius: BorderRadius.circular(25.0),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.5
+                            )
+                        ),
+                        child: Center(
+                          child: Text(
+                            "SWIPE UP",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
+                      )
+                    ],
+                  ),
+                )
               ),
             )
           ],
