@@ -5,6 +5,7 @@ import 'package:flutter_practice_animation/screens/animated_rating_hearts_screen
 import 'package:flutter_practice_animation/screens/animated_rating_hearts_two_screen.dart';
 import 'package:flutter_practice_animation/screens/custom_painter_screen.dart';
 import 'package:flutter_practice_animation/screens/multi_animations_screen.dart';
+import 'package:flutter_practice_animation/screens/page_controller_screen.dart';
 import 'package:flutter_practice_animation/screens/physics_simulation_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_practice_animation/screens/align_transition_screen.dart';
@@ -136,6 +137,15 @@ mixin PageRouter implements StatelessWidget {
       case '/animated_rating_hearts_two':
         return PageTransition(
             child: AnimatedRatingHeartsTwoScreen(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.bottomCenter,
+            duration: Duration(seconds: 1),
+            settings: settings
+        );
+        break;
+      case '/page_controller':
+        return PageTransition(
+            child: PageControllerScreen(),
             type: PageTransitionType.scale,
             alignment: Alignment.bottomCenter,
             duration: Duration(seconds: 1),
