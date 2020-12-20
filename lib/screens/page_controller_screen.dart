@@ -25,6 +25,28 @@ class _State extends State<PageControllerScreen> {
     super.dispose();
   }
 
+  Widget _buildIconsArea() => Stack(
+    children: [
+      Center(
+        child: Icon(
+          Icons.circle,
+          size: 75,
+          color: Colors.white,
+        ),
+      ),
+      Center(
+        child: RotatedBox(
+          quarterTurns: 3,
+          child: Icon(
+            Icons.forward,
+            size: 75,
+            color: Colors.blue[100],
+          )
+        )
+      )
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +120,39 @@ class _State extends State<PageControllerScreen> {
                 ],
               )
             ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: GestureDetector(
+                child: Column(
+                  children: [
+                    _buildIconsArea(),
+                    Container(
+                      width: 120,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[100], // Colors.transparent
+                        borderRadius: BorderRadius.circular(25.0),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2.5
+                        )
+                      ),
+                      child: Center(
+                        child: Text(
+                          "SWIPE UP",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
