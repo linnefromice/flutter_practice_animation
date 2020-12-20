@@ -56,36 +56,44 @@ class _State extends State<PageControllerScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RaisedButton(
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
+                      ButtonTheme(
+                        minWidth: 50,
+                        height: 50,
+                        child: RaisedButton(
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          color: Colors.transparent,
+                          shape: CircleBorder(),
+                          onPressed: () {
+                            _pageController.animateToPage(
+                              _pageController.page.toInt() - 1,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          }
                         ),
-                        color: Colors.transparent,
-                        shape: CircleBorder(),
-                        onPressed: () {
-                          _pageController.animateToPage(
-                            _pageController.page.toInt() - 1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                          );
-                        }
                       ),
-                      SizedBox(width: 150),
-                      RaisedButton(
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
+                      SizedBox(width: 200),
+                      ButtonTheme(
+                        minWidth: 50,
+                        height: 50,
+                        child: RaisedButton(
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
+                          color: Colors.transparent,
+                          shape: CircleBorder(),
+                          onPressed: () {
+                            _pageController.animateToPage(
+                              _pageController.page.toInt() + 1,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          }
                         ),
-                        color: Colors.transparent,
-                        shape: CircleBorder(),
-                        onPressed: () {
-                          _pageController.animateToPage(
-                            _pageController.page.toInt() + 1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                          );
-                        }
                       )
                     ],
                   )
