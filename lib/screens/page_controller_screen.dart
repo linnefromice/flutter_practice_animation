@@ -136,6 +136,9 @@ class _State extends State<PageControllerScreen> with SingleTickerProviderStateM
               left: 0,
               right: 0,
               child: GestureDetector(
+                onVerticalDragEnd: (details) {
+                  _animationController.forward();
+                },
                 child: FadeTransition(
                   opacity: _opacity,
                   child: Column(
